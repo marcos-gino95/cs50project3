@@ -1,0 +1,156 @@
+{% extends "orders/base.html" %}
+
+{% block tittle %}{% endblock %}
+
+{% block body %}
+<!-- <div align="center"><img src="../pictures/pizza.png"></div> -->
+<h2> <span id ='show'>PINOCHO's PIZZA</span> </h2> 
+ <h3>Welcome {{ user.first_name }} {{ user.last_name }}</h3>
+<h3> Menu available:</h3>
+<ul class="mmenu">
+  <li class='menu' id='textpi' >Regular Pizza </li>
+    <ul class="sub-regular">
+      <li><a href="{% url 'regular_view' option=0 %}">Small</a></li>
+      <li><a href="{% url 'regular_view' option=1 %}">Large</a></li>
+    </ul>
+    {% if regular_pizzas %}
+    <ol>
+    {% for regular_pizza in regular_pizzas %}
+      <li>
+        <form action="{% url 'add_regular' regular_pizza.id %}" method="post">
+          {% csrf_token %}
+            {{ regular_pizza.type }}, {{ regular_pizza.items }}, {{ regular_pizza.price }}
+            {% if regular_pizza.items > 0 %}
+              <span id='show' data-allow="{{ regular_pizza.items }}">Select Toppings</span>
+              <div class="toppi" data-allow="{{ regular_pizza.items }}">
+                {% for topping in toppings %}
+                    <input name='toppings[]' type="checkbox" id="topp" value="{{ topping }}" data-allow="{{ regular_pizza.items }}"><label for="{{ topping }}">{{ topping }}</label>
+                {% endfor %}
+
+              </div>
+            {% endif %}
+          <button type='submit'class="btn-danger">Add to cart</button>
+        </form>
+      </li>
+    {% endfor %}
+    </ol>
+    {% endif %}
+
+
+  <li class='menu' id='textpi'>Sicilian Pizza</li>
+    <ul class="sub-sicilian">
+      <li><a href="{% url 'sicilian_view' option=0 %}">Small</a></li>
+      <li><a href="{% url 'sicilian_view' option=1 %}">Large</a></li>
+    </ul>
+    {% if sicilian_pizzas %}
+    <ol>
+    {% for sicilian_pizza in sicilian_pizzas %}
+      <li>
+        <form action="{% url 'add_sicilian' sicilian_pizza.id %}" method="post">
+          {% csrf_token %}
+          {{ sicilian_pizza.type }}, {{ sicilian_pizza.items }}, {{ sicilian_pizza.price }}
+            {% if sicilian_pizza.items > 0 %}
+              <span id='show' data-allow="{{ sicilian_pizza.items }}">Select Toppings</span>
+              <div class="toppi" data-allow="{{ sicilian_pizza.items }}">
+                {% for topping in toppings %}
+                    <input name='toppings[]' type="checkbox" id="topp" value="{{ topping }}" data-allow="{{ sicilian_pizza.items }}"><label for="{{ topping }}">{{ topping }}</label>
+                {% endfor %}
+
+              </div>
+            {% endif %}
+          <button type='submit'>Add to cart</button>
+        </form>
+      </li>
+    {% endfor %}
+    </ol>
+    {% endif %}
+
+    <div class="col-50" style="padding-top:  " >
+  <li class='menu' id='textpi'>Subs</li>
+  <ul class="sub-subs">
+    <li><a href="{% url 'sub_view' option=4 %}">Small</a></li>
+    <li><a href="{% url 'sub_view' option=5 %}">Large</a></li>
+  </ul>
+  {% if subs %}
+  <ol>
+  {% for sub in subs %}
+    <li>
+    <form action="{% url 'add_sub' sub.id %}" method="post">
+      {% csrf_token %}
+      {{ sub.type }}, {{ sub.price }}
+      <button type='submit' >Add to cart</button>
+    </form>
+    </li>
+  {% endfor %}
+  </ol>
+{% endif %}
+</div>
+
+  <li class='menu' id='textpi'><a href="{% url 'pasta_view' %}">Pasta</a></li>
+  {% if pastas %}
+  <ol>
+  {% for pasta in pastas %}
+    <li>
+      <form action="{% url 'add_pasta' pasta.id %}" method="post">
+      {% csrf_token %}
+      {{ pasta.type }}, {{ pasta.price }}
+      <button type='submit' >Add to cart</button>
+      </form>
+    </li>
+  {% endfor %}
+</ol>
+{% endif %}
+
+
+  <li class='menu' id='textpi'><a href="{% url 'salad_view' %}">Salads</a></li>
+  {% if salads %}
+  <ol>
+  {% for salad in salads %}
+    <li>
+      <form action="{% url 'add_salad' salad.id %}" method="post">
+      {% csrf_token %}
+      {{ salad.type }}, {{ salad.price }}
+      <button type='submit' >Add to cart</button>
+      </form>
+    </li>
+  {% endfor %}
+</ol>
+{% endif %}
+
+
+  <li class='menu' id='textpi'>Dinner Platters</li>
+  <ul class="sub-dinner">
+    <li><a href="{% url 'dinner_view' option=6 %}">Small</a></li>
+    <li><a href="{% url 'dinner_view' option=7 %}">Large</a></li>
+  </ul>
+  {% if dinners %}
+  <ol>
+  {% for dinner in dinners %}
+    <li>
+      <form action="{% url 'add_dinner' dinner.id %}" method="post">
+      {% csrf_token %}
+      {{ dinner.type }}, {{ dinner.price }}
+      <button type='submit' >Add to cart</button>
+      </form>
+    </li>
+  {% endfor %}
+</ol>
+{% endif %}
+
+
+</ul>
+
+<div class="cart">
+  <h3>Current Cart:</h3>
+  {% if items %}
+    {% for item in items %}
+        <p>{{ item.description }} <span class="item">{{ item.price }}</span>  <a class='rm' href="{% url 'remove' item.id %}">X</a></p>
+    {% endfor %}
+    <hr>
+    <p>Total: <span class="total"></span>$ <a id='btn-danger' href="{% url 'confirm_view' %}">Done</a></p>
+  {% else %}
+    <p>No items</p>
+  {% endif %}
+</div>
+<a id='btn' href="{% url 'orders_view' %}">All orders</a><a id='btn' href="{% url 'logout' %}">Logout</a>
+{% endblock %}

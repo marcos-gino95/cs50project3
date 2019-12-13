@@ -1,0 +1,18 @@
+{% extends "orders/base.html" %}
+{% block tittle %}Your Order{% endblock %}
+{% block body %}
+<hr>
+{% for order in orders %}
+    <p>{{ order.description }} <span class="item">{{ order.price }}</span></p>
+{% endfor %}
+<hr>
+<p>Total: <span class="total"></span>$</p>
+{% if user.is_superuser %}
+    <a href="{% url 'complete' order %}">Mark as complete</a>
+{% else %}
+    <a href="{% url 'index' %}">New Order</a>
+{% endif %}
+
+
+<a id='btn' href="{% url 'logout' %}">Logout</a>
+{% endblock %}

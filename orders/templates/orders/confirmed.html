@@ -1,0 +1,15 @@
+{% extends "orders/base.html" %}
+
+{% block tittle %}Order Confimed{% endblock %}
+
+{% block body %}
+<h4>Your order was placed!!</h4>
+<p>For {{ order.username }}, your order is {{ order.status }}.</p>
+<hr>
+{% for item in items %}
+    <p>{{ item.description }} <span class="item">{{ item.price }}</span></p>
+{% endfor %}
+<hr>
+<p>Total: <span class="total"></span>$</p>
+<a id='btn' href="{% url 'orders_view' %}">View all my orders</a><a id='btn' href="{% url 'index' %}">New Order</a><a id='btn' href="{% url 'logout' %}">Logout</a>
+{% endblock %}

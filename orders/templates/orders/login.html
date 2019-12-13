@@ -1,0 +1,34 @@
+{% extends "orders/base.html" %}
+
+{% block tittle %}Pinocho's Pizza{% endblock %}
+
+{% block body %}
+<div class="header">
+  <center><h2><span id="show">Pinocho's Pizza</span></h2>
+</div></center>
+<div class="login">
+  <h3><span id="textpi">Login </span></h3>
+  <p>{{ message }}</p>
+  <form class='login' action="{% url 'login' %}" method = 'post'>
+    {% csrf_token %}
+    <input name="username" type="text" placeholder="username"/>
+    <input name="password" type="password" placeholder="password"/>
+    <button type='submit'id="show">Login</button>
+  </form>
+</div>
+
+
+<div class="Register">
+  <h3><span id="textpi">Register</span></h3>
+  <p>{{ Rmessage }}</p>
+  <form class='register' action="{% url 'signup' %}" method = 'post'>
+    {% csrf_token %}
+    <p id="input">First Name: </p><input name="first-name" type="text" placeholder="first name"/>
+    <p id="input">Last Name: </p><input name="last-name" type="text" placeholder="last name"/>
+    <p id="input">Username: </p><input name="username" type="text" placeholder="username"/>
+    <p id="input">Email: </p><input name="email" type="email" placeholder="email"/>
+    <p id="input">Password: </p><input name="password" type="password" placeholder="password"/><br>
+    <button type='submit' id="show">Register</button>
+  </form>
+</div>
+{% endblock %}

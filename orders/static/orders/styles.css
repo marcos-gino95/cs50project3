@@ -1,0 +1,55 @@
+
+.toppi {
+  display: none;
+}
+#xdxd {
+  display: none;
+}
+
+.sub-dinner, .sub-regular, .sub-sicilian, .sub-subs {
+  display: block;
+}
+
+
+#btn {
+  border-radius: 5px;
+  border: solid 2px;
+  padding: 5px;
+  margin: 10px;
+  border-color: rgb(99, 31, 31);
+  color: rgb(99, 31, 31);
+  background-color: rgb(255, 148, 148);
+}
+
+#btn:hover {
+  border-color: rgb(255, 148, 148);
+  color:rgb(255, 232, 232);
+  background-color: rgb(99, 31, 31);
+}
+#textpi
+{
+  color: rgb(61, 6, 245);
+
+}
+#show {
+  border-radius: 5px;
+  padding: 5px;
+  color: rgb(251, 251, 251);
+  margin: 10px;
+  background-color: rgb(247, 6, 6);
+}
+#show:hover {
+  color: rgb(253, 253, 253);
+  background-color: rgb(245, 14, 26);
+}
+li{
+  padding: 5px;
+}
+
+.rm {
+  padding: 5px;
+  margin: 10px;
+  border-radius: 5px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(143, 39, 39);
+}

@@ -1,0 +1,21 @@
+{% extends "orders/base.html" %}
+{% block tittle %}Orders{% endblock %}
+{% block body %}
+<h3>Your orders:</h3>
+<p><co>In progress:</p>
+{% for progess in in_progres_orders %}
+    <p><a href="{% url 'view_order' progess.id %}">For {{ progess.username }}, order number: {{ progess.id }}</a></p>
+{% endfor %}
+<p>Completed:</p>
+{% for completed in completed_orders %}
+    <p><a href="{% url 'view_order' completed.id %}">For {{ completed.username }}, order number: {{ completed.id }}</a></p>
+{% endfor %}
+
+
+{% if not user.is_superuser %}
+
+<a href="{% url 'index' %}">New Order</a>
+{% endif %}
+
+ <a href="{% url 'logout' %}">Logout</a>
+{% endblock %}
